@@ -1,0 +1,5 @@
+prodEsc([],[],0).
+prodEsc([H|T],[Cab|Cauda],Res) :-
+    X is H * Cab,
+    Res1 is X + Res,
+    prodEsc(T,Cauda,Res1).

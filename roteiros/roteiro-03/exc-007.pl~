@@ -1,0 +1,2 @@
+subconjunto([],_).
+subconjunto([H|T],[H|X]) :- subconjunto(T,X).

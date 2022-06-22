@@ -1,0 +1,2 @@
+tres_vezes([], []).
+tres_vezes([H|T],Lista) :- tres_vezes(T,[H,H,H|Lista]).

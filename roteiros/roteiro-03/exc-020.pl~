@@ -1,0 +1,7 @@
+remove(X,[X|Xs],Xs).
+remove(X,[H|T],[H|Cauda]) :- remove(X,T,Cauda).
+
+permutacao([],[]).
+permutacao(Xs,[Y|Zs]):-
+remove(Y,Xs,Ys),
+permutacao(Ys,Zs).

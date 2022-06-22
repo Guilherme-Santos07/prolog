@@ -1,0 +1,7 @@
+concatena(X,[],X).
+concatena([],X,X).
+concatena([X|Xs],Y,[X|Lista]) :- concatena(Xs,Y,Lista).
+
+
+duplicada([]).
+duplicada([H|T]) :-

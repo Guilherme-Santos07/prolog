@@ -1,0 +1,11 @@
+remove(X, [X|Ys], Ys).
+remove(X, [Y|Ys], [Y|Z]):-
+	remove(X,Ys,Z).
+
+insere(_,[],[]).
+insere(X, [H|T], [X|Cauda]) :- insere(X,T,Cauda).
+% insere(X,[_|T],[X|Cauda]) :- insere(X,T,Cauda).
+
+
+
+

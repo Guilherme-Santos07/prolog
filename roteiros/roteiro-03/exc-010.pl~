@@ -1,0 +1,4 @@
+inverte([X],X).
+inverte([Cab|Cauda],'[|]'(X,Cab)) :- inverte(Cauda,X).
+
+palindromo(X) :- inverte(X, Y), Y = X.

@@ -1,0 +1,5 @@
+remove(_,[],[]).
+remove(Letra,[H|T],Res) :-
+    Letra = H, remove(Letra,T,Res).
+remove(Letra,[H|T],[H|Cauda]) :-
+    remove(Letra,T,Cauda).
