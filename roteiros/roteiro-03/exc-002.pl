@@ -8,6 +8,6 @@ traducao(sette, sete ).
 traducao(otto, oito ).
 traducao(nove, nove).
 
-traduz_lista([X],[Y]) :- traducao(X,Y).
-traduz_lista([H|T], [X|Y]) :- traduz_lista(T,Y),traducao(H,X).
+traduz_lista([],[]).
+traduz_lista([H|T], [X|Y]) :- traducao(H,X), traduz_lista(T,Y).
 

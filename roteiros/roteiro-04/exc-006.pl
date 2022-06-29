@@ -1,0 +1,10 @@
+replica(Lista,Num,Res) :-
+    replica(Lista,Num,0,Res).
+
+replica([],_,_,[]):- !.
+replica([H|_],Num,Acum,[H|Cauda]) :-
+    Acum1 is Acum + 1,
+    replica([H],Num,Acum1,Cauda).
+
+replica([_|T],Num,Num,Lista) :-
+    replica(T,Num,0,Lista).

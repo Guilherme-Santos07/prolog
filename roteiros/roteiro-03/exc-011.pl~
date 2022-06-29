@@ -1,20 +1,16 @@
-dig(0,zero).
-dig(1,um).
-dig(2,dois).
-dig(3,tres).
-dig(4,quatro).
-dig(5,cinco).
-dig(6,seis).
-dig(7,sete).
-dig(8,oito).
-dig(9,nove).
+%digitos(0, []).
+%digitos(Numero, [Resto|Cauda]) :- Resto is Numero mod 10,
+%Div is Numero // 10,
+%Numero \= 0,
+%digitos(Div, Cauda),
+%inverte().
 
-digitos(0, []).
-digitos(Numero, [Nome|Cauda]) :- Resto is Numero mod 10,
-    dig(Resto, Nome),
+digitos(Numero, Lista) :- digitos(Numero, Teste, Lista).
+digitos(Numero, [Resto|Cauda], Lista) :- Resto is Numero mod 10,
     Div is Numero // 10,
     Numero \= 0,
-    digitos(Div, Cauda).
+    digitos(Div, Cauda, Lista),
+    inverte([Resto|Cauda], Lista).
 
 concatena([],Y,Y).
 concatena(Y,[],Y).

@@ -1,0 +1,20 @@
+retorna_sublista([],[]).
+retorna_sublista([H,H|T],[H|Cauda]) :-
+    H = H,
+    retorna_sublista(T,Cauda).
+retorna_sublista([X,Y|T],Lista) :-
+    X \= Y,
+    retorna_sublista(T,Lista).
+
+separa_dup(Listad,Lista) :-
+    separa_dup(Listad,[],Lista).
+
+separa_dup([],_,[]).
+separa_dup([H|T],Acum,Lista):-
+    ocorrencia(H,T,X),
+    X >= 1,
+    separa_dup(T,[H|Acum],Lista).
+separa_dup([H|T],Acum,[Acum|Cauda]) :-
+    ocorrencia(H,T,X),
+    X =:= 0,
+    separa_dup(T,[H],Cauda).

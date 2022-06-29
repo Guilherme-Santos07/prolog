@@ -1,0 +1,5 @@
+segmento([],[]).
+segmento([H|T],[H|Cauda]):-
+    segmento(T,Cauda).
+segmento(Lista,[_|Cauda]) :-
+    segmento(Lista,Cauda).
