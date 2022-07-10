@@ -1,0 +1,17 @@
+por_extenso(X,[átomo,X]) :-
+    atom(X),!.
+
+por_extenso(X,[numero,inteiro,X]) :-
+    integer(X),!.
+
+por_extenso(X,[numero,flutuante,X]) :-
+    float(X),!.
+
+por_extenso(X,[variável,X]) :-
+    var(X),!.
+
+por_extenso([],[]).
+por_extenso([H|T],[lista,com,cabeça,H,e,cauda,é,uma|Cauda]):-
+    nonvar(H),
+    por_extenso(T,Cauda).
+
