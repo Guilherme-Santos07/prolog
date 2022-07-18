@@ -1,0 +1,18 @@
+:-['exc-006'].
+
+soma_hora(H1 h M1, H2 h M2, HT h MT) :-
+    S1 is (H1 * 60)+M1,
+    S2 is (H2 * 60)+M2,
+    ST is S1 + S2,
+    HT is ST div 60,
+    HT < 24,
+    MT is ST mod 60, !.
+
+soma_hora(H1 h M1, H2 h M2, HT1 h MT) :-
+    S1 is (H1 * 60)+M1,
+    S2 is (H2 * 60)+M2,
+    ST is S1 + S2,
+    HT is ST div 60,
+    HT1 is HT - 24,
+    MT is ST mod 60.
+

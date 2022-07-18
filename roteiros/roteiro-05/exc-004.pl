@@ -1,0 +1,22 @@
+verifica_termos(Termo,Aridade) :-
+    verifica_termos(Termo,1,Aridade).
+
+verifica_termos(_,Acum,Aridade) :- Acum > Aridade, !.
+
+verifica_termos(Termo,Acum,Aridade):-
+    arg(Acum,Termo,Argumento),
+    nonvar(Argumento),
+    Acum1 is Acum + 1,
+    verifica_termos(Termo,Acum1,Aridade).
+
+termoaterrado(Elemento):-
+    nonvar(Elemento),
+    functor(Elemento,_,Aridade),
+    Aridade == 0,
+    !.
+
+termoaterrado(Elemento):-
+    nonvar(Elemento),
+    functor(Elemento,_,Aridade),
+    Aridade > 0,
+    verifica_termos(Elemento,Aridade).
