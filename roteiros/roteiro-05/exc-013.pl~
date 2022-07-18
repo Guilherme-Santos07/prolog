@@ -1,0 +1,13 @@
+
+classe1(Numero, positivo):- Numero > 0.
+classe1(0, zero).
+classe1(Numero, negativo):- Numero < 0.
+/*
+O predicado acima é composto por dois parâmetros e retorna "positivo"
+caso o número seja maior do que zero, "negativo" caso o número seja
+menor do que zero ou "zero" caso ele seja igual a zero.
+*/
+
+classe(0, zero):-!.
+classe(Numero, positivo):- Numero > 0,!.
+classe(Numero, negativo):- Numero < 0.

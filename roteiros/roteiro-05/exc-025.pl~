@@ -1,2 +1,2 @@
-nu(X,Y):- X = Y, fail, !.
+nu(X,Y):- ((X = Y);(Y = X)), fail, !.
 nu(_,_).

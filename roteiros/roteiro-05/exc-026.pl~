@@ -1,0 +1,5 @@
+/*
+?- unificavel([X,b,t(Y)],t(a),Lista).
+Lista = [X,t(Y)].
+/*
+
