@@ -1,0 +1,5 @@
+:- ['idades'].
+
+/*
+?- findall(Pessoas,idade(Pessoas,Idade),Lista).
+*/

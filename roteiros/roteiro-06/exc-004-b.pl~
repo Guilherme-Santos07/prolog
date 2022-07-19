@@ -1,0 +1,5 @@
+:- ['idades'].
+
+/*
+setof(Idade,Pessoas^(idade(Pessoas,Idade)),Lista).
+*/

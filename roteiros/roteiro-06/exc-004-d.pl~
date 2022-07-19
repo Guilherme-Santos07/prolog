@@ -1,0 +1,5 @@
+:- ['idades'].
+
+/*
+findall(Pessoas, (idade(Pessoas,Idades),Idades>=8,Idades=<12),Lista).
+*/
