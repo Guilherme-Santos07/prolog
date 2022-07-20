@@ -1,0 +1,12 @@
+/*?- assert(q(a,b)), assertz(q(1,2)), asserta(q(foo,blug)).
+true.
+
+?- listing(q/2).
+:- dynamic q/2.
+
+q(foo, blug).
+q(a, b).
+q(1, 2).
+
+true.
+*/

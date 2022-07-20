@@ -1,0 +1,11 @@
+somatorio(Num,Res):-
+    somatorio(Num,0,Res).
+
+somatorio(Num,Res):- res_somatorio(Num,Res),!.
+
+somatorio(0,Acum,Acum):- !.
+somatorio(Num,Acum,Res):-
+    Acum1 is Acum + Num,
+    Num1 is Num - 1,
+    somatorio(Num1,Acum1,Res),
+    assert(res_somatorio(Num,Res)).
