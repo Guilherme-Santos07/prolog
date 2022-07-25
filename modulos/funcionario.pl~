@@ -1,0 +1,8 @@
+:- module(funcionario,[seleciona/5]).
+
+seleciona(MatFunc, Nome, NumDepto, Salário, MatGerente):-
+ open('tbl_funcionário.pl',read,Fluxo),
+ read(Fluxo,C),
+ C = funcionario(MatFunc, Nome, NumDepto, Salário, MatGerente),
+ NumDepto = 2, Salário > 2100,
+ fail.

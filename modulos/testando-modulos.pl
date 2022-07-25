@@ -1,0 +1,14 @@
+% importa a biblioteca persistency
+:- use_module(library(persistency)).
+% esquema da relação
+:- persistent
+funcionario(matrícula:positive_integer,
+ nome:atom,
+ departamento:nonneg,
+ salário:positive_integer,
+ matrícula_gerente:positive_integer).
+% Anexa o arquivo que servirá como armazém de fatos
+:- initialization(db_attach('tbl_funcionário.pl', [])).
+
+sincroniza :-
+db_sync(gc(always)).
