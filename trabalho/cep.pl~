@@ -28,7 +28,7 @@ remove(Id):-
 
 atualiza(Id,CidadeId,BairroId,LogradouroId):-
     with_mutex(cep,
-               (   retract_cep(Id,_CidadeId,_BairroId,_LogradouroId),
+               (   retractall_cep(Id,_CidadeId,_BairroId,_LogradouroId),
                    assert_cep(Id,CidadeId,BairroId,LogradouroId))).
 
 
