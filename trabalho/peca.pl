@@ -7,6 +7,9 @@
 
 :- use_module(chave,[]).
 :- use_module(library(persistency)).
+:- use_module(verifica_conjunto,[]).
+:- use_module(verifica_aviao,[]).
+:- use_module(verifica_grupo,[]).
 
 :- persistent
        peca(
@@ -34,6 +37,9 @@
 
 insere(Id,Gru_id,Con_id,Avi_id,Pec_nome,Pec_peso_bruto,Pec_peso_liquido,Pec_custo,Pec_cod_fabricacao,Pec_cod_armazenamento,Pec_estoque_max,Pec_estoque_min,Pec_qtd_estoque,Pec_sala,Pec_prateleira,Pec_gaveta,Pec_estante,Pec_corredor):-
     chave:pk(peca,Id),
+    verifica_aviao:verifica_aviao(Avi_id),
+    verifica_conjunto:verifica_conjunto(Con_id),
+    verifica_grupo:verifica_grupo(Gru_id),
     with_mutex(peca,
                assert_peca(Id,Gru_id,Con_id,Avi_id,Pec_nome,Pec_peso_bruto,Pec_peso_liquido,Pec_custo,Pec_cod_fabricacao,Pec_cod_armazenamento,Pec_estoque_max,Pec_estoque_min,Pec_qtd_estoque,Pec_sala,Pec_prateleira,Pec_gaveta,Pec_estante,Pec_corredor)).
 

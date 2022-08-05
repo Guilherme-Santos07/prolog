@@ -2,6 +2,7 @@
 
 :- use_module(library(persistency)).
 :- use_module(chave,[]).
+:- use_module(verifica_aviao,[]).
 
 :- persistent
        teste(tes_id: positive_integer,
@@ -15,6 +16,7 @@
 
 insere(Id,Aviao,(Dia,Mes,Ano,Hora,Min),Desc,Rej):-
     chave:pk(teste,Id),
+    verifica_aviao:verifica_aviao(Aviao),
     Hora_atual is Hora + 3,
     date_time_stamp(date(Ano,Mes,Dia,Hora_atual,Min,0,0,-,-),Stamp),
     with_mutex(teste,
