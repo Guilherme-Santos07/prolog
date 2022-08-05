@@ -6,6 +6,9 @@
 :- module(cep,[cep/4]).
 :- use_module(library(persistency)).
 :- use_module(chave,[]).
+:- use_module(verifica_cidade,[]).
+:- use_module(verifica_bairro,[]).
+:- use_module(verifica_logradouro,[]).
 
 :- persistent
     cep(
@@ -19,6 +22,9 @@
 
 insere(Id,CidadeId,BairroId,LogradouroId):-
     chave:pk(cep,Id),
+    verifica_cidade:verifica_cidade(CidadeId),
+    verifica_bairro:verifica_bairro(BairroId),
+    verifica_logradouro:verifica_logradouro(LogradouroId),
     with_mutex(cep,
                assert_cep(Id,CidadeId,BairroId,LogradouroId)).
 
