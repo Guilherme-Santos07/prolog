@@ -1,0 +1,6 @@
+%doze(A-[]) :- a(A-B), doze(B-C), bb(C-[]).
+doze --> [].
+doze --> a,doze,bb.
+a --> [a].
+bb --> [b,b].
+

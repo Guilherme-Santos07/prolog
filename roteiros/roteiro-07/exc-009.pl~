@@ -1,0 +1,24 @@
+%prop_simples([')'|T]-T).
+parenteses_inicio --> ['('].
+parenteses_fim --> [')'].
+
+%prop(A-[]):- prop_simples(A-B),simbolos(B-C),prop(C-[]).
+prop --> prop_simples.
+prop --> [não],prop_simples.
+prop --> [não],prop.
+prop --> [não],parenteses_inicio,prop,parenteses_fim.
+
+prop --> prop_simples,simbolos,prop_simples.
+prop --> parenteses_inicio,prop_simples,simbolos,prop_simples,parenteses_fim.
+
+
+%prop_simples([p|T]-T).
+prop_simples --> [p].
+prop_simples --> [q].
+prop_simples --> [r].
+
+%simbolos([e|T]-T).
+simbolos --> [e].
+simbolos --> [ou].
+simbolos --> [implica].
+

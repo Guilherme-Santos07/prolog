@@ -1,0 +1,4 @@
+
+%onze(A-):- [a|A],[b|C],C =
+onze --> [].
+onze --> [a],onze,[b].

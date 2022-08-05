@@ -1,0 +1,34 @@
+s(s(SN,SV)) --> sn(X,sujeito,SN), sv(X,SV).
+
+sn(X,sujeito,sn(DET,N)) --> det(X,DET), n(X,N).
+sn(X,sujeito,sn(PS)) --> pro(X,sujeito,PS).
+
+sn(X,objeto,sn(DET,N)) --> det(X,DET), n(X,N).
+sn(X,objeto,sn(PO)) --> pro(X,objeto,PO).
+
+sv(X,sv(V,SN)) --> v(X,V), sn(X,objeto,SN).
+sv(X,sv(V)) --> v(X,V).
+
+
+det(plural,det(os)) --> [os].
+det(plural,det(as)) --> [as].
+det(singular,det(o)) --> [o].
+det(singular,det(a)) --> [a].
+
+n(plural,n(mulheres)) --> [mulheres].
+n(plural,n(homens)) --> [homens].
+n(singular,n(mulher)) --> [mulher].
+n(singular,n(homem)) --> [homem].
+
+v(plural,v(batem)) --> [batem].
+v(singular,v(bate)) --> [bate].
+
+pro(singular,sujeito,pro_sujeito_singular(ela)) --> [ela].
+pro(singular,sujeito,pro_sujeito_singular(ele)) --> [ele].
+pro(plural,sujeito,pro_sujeito_plural(eles)) --> [eles].
+pro(plural,sujeito,pro_sujeito_plural(elas)) --> [elas].
+
+pro(singular,objeto,pro_objeto_singular(nele)) --> [nele].
+pro(singular,objeto,pro_objeto_singular(nela)) --> [nela].
+pro(plural,objeto,pro_objeto_plural(neles)) --> [neles].
+pro(plural,objeto,pro_objeto_plural(nelas)) --> [nelas].
