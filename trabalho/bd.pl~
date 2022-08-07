@@ -26,3 +26,8 @@
             peca,
             pessoa,
             teste]).
+
+%[
+%              if(not_loaded), % só carrega o módulo uma vez
+%                 silent(true) % carrega o módulo sem imprimir mensagem
+%         ])
