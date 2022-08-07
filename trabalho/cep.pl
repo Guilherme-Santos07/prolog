@@ -1,7 +1,7 @@
 % Guilherme dos Santos Silva
 % 12111BSI214
-% Sistema de Gestão de Estoque e Produção da Fábrica  Brasileira de Aeronaves [2008]
-% Páginas 91, 92 e 93
+% Sistema de Gestï¿½o de Estoque e Produï¿½o da Fï¿½brica  Brasileira de Aeronaves [2008]
+% Pï¿½ginas 91, 92 e 93
 
 :- module(cep,[cep/4]).
 :- use_module(library(persistency)).
@@ -21,10 +21,10 @@
 :- initialization(at_halt(db_sync(gc(always)))).
 
 insere(Id,CidadeId,BairroId,LogradouroId):-
-    chave:pk(cep,Id),
     verifica_cidade:verifica_cidade(CidadeId),
     verifica_bairro:verifica_bairro(BairroId),
     verifica_logradouro:verifica_logradouro(LogradouroId),
+    chave:pk(cep,Id),
     with_mutex(cep,
                assert_cep(Id,CidadeId,BairroId,LogradouroId)).
 
@@ -33,8 +33,9 @@ remove(Id):-
                (   retractall_cep(Id,_CidadeId,_BairroId,_LogradouroId))).
 
 atualiza(Id,CidadeId,BairroId,LogradouroId):-
+    verifica_cidade:verifica_cidade(CidadeId),
+    verifica_bairro:verifica_bairro(BairroId),
+    verifica_logradouro:verifica_logradouro(LogradouroId),
     with_mutex(cep,
                (   retract_cep(Id,_CidadeId,_BairroId,_LogradouroId),
                    assert_cep(Id,CidadeId,BairroId,LogradouroId))).
-
-

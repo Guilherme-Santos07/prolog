@@ -1,8 +1,8 @@
-% Aluno: Bernardo Hipólito Mundim Porto.
+% Aluno: Bernardo Hipï¿½lito Mundim Porto.
 % Matricula : 12111BSI219.
-% % Sistema de gestão de Estoque e Produção da Fabrica Brasileira de
+% % Sistema de gestï¿½o de Estoque e Produï¿½o da Fabrica Brasileira de
 % Aeronaves[2008].
-% Páginas: 91,92,93.
+% Pï¿½ginas: 91,92,93.
 
 :- module(
        pessoa,
@@ -25,16 +25,17 @@
 :- initialization(at_halt(db_sync(gc(always)))).
 
 insere(Pes_id,Cep_id,Pes_nome,Pes_telefone,Pes_email,Pes_numero):-
-    chave:pk(pessoa,Pes_id),
     verifica_cep:verifica_cep(Cep_id),
+    chave:pk(pessoa,Pes_id),
     with_mutex(pessoa,
                assert_pessoa(Pes_id,Cep_id,Pes_nome,Pes_telefone,Pes_email,Pes_numero)).
 
 remove(Pes_id):-
     with_mutex(pessoa,
-               retract_pessoa(Pes_id,_Cep_id,_Pes_nome,_Pes_telefone,_Pes_email,_Pes_numero)).
+               retractall_pessoa(Pes_id,_Cep_id,_Pes_nome,_Pes_telefone,_Pes_email,_Pes_numero)).
 
 atualiza(Pes_id,Cep_id,Pes_nome,Pes_telefone,Pes_email,Pes_numero):-
+    verifica_cep:verifica_cep(Cep_id),
     with_mutex(pessoa,
               (retract_pessoa(Pes_id,_Cep_id,_Pes_nome,_Pes_telefone,_Pes_email,_Pes_numero),assert_pessoa(Pes_id,Cep_id,Pes_nome,Pes_telefone,Pes_email,Pes_numero)) ).
 

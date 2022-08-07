@@ -9,9 +9,9 @@
 :- persistent
     grupo(gru_id: positive_integer,
           gru_nome: text).
+
 :- initialization(db_attach('tbl_grupo.pl', [])).
 :- initialization(at_halt(db_sync(gc(always)))).
-sincroniza :-db_sync(gc(always)).
 
 insere(Id,Nome):-
     chave:pk(grupo,Id),

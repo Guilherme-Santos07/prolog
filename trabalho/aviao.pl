@@ -1,7 +1,7 @@
-%João Pedro Cruz Espíndola
+%Joï¿½o Pedro Cruz Espï¿½ndola
 %12111BSI245
-%Sistema de Gestão de Estoque e Produção da Fábrica  Brasileira de Aeronaves [2008]
-%Páginas 91.92 e 93
+%Sistema de Gestï¿½o de Estoque e Produï¿½o da Fï¿½brica  Brasileira de Aeronaves [2008]
+%Pï¿½ginas 91.92 e 93
 
 :-module(
       aviao,
@@ -11,7 +11,6 @@
 
 :- use_module(library(persistency)).
 :- use_module(chave,[]).
-
 
 :- persistent
     aviao(avi_id:positive_integer,

@@ -2,4 +2,4 @@
 :- use_module(aviao, []).
 
 verifica_aviao(Id):-
-    aviao:aviao(Id,_).
+    aviao:aviao(Id,_,_).

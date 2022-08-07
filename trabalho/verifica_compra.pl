@@ -3,5 +3,5 @@
 :- use_module(compra,[]).
 
 verifica_compra(Id):-
-    compra:compra(Id,_Bo,_Ca,_Co,_Ba,_Alo).
+    compra:compra(Id,_,_,_,_,_).
 

@@ -3,28 +3,36 @@
 % Sistema de Gestão de Estoque e Produção da Fábrica  Brasileira de Aeronaves [2008]
 % Páginas 91, 92 e 93
 
-:- module(etapa_peca,[etapa_peca/3]).
+:- module(etapa_peca,[etapa_peca/4]).
 
 :- use_module(library(persistency)).
 :- use_module(chave,[]).
+:- use_module(verifica_etapa_producao,[]).
+:- use_module(verifica_peca,[]).
 
 :- persistent
-    etapa_peca(ep_ind: positive_integer,
+    etapa_peca(ep_id:positive_integer,
+               ep_ind: positive_integer,
                pec_id: positive_integer,
                epe_qtd_peca: float).
 
 :- initialization(db_attach('tbl_etapa_peca.pl', [])).
 :- initialization(at_halt(db_sync(gc(always)))).
 
-insere(Ep_ind, Pec_id, Qtd):-
+insere(Ep_id,Ep_ind, Pec_id, Epe_qtd_peca):-
+    verifica_etapa_producao:verifica_etapa_producao(Ep_ind),
+    verifica_peca:verifica_peca(Pec_id),
+    chave:pk(etapa_producao,Ep_id),
     with_mutex(etapa_peca,
-               (   assert_etapa_peca(Ep_ind,Pec_id,Qtd))).
+               (   assert_etapa_peca(Ep_id,Ep_ind,Pec_id,Epe_qtd_peca))).
 
-remove(Ep_ind):-
+remove(Ep_id):-
     with_mutex(etapa_peca,
-               (   retractall_etapa_peca(Ep_ind,_Pec_id, _Qtd))).
+               (   retractall_etapa_peca(Ep_id,_Ep_ind,_Pec_id, _Epe_qtd_peca))).
 
-atualiza(Ep_ind,Pec_id,Qtd):-
+atualiza(Ep_id,Ep_ind,Pec_id,Epe_qtd_peca):-
+    verifica_etapa_producao:verifica_etapa_producao(Ep_ind),
+    verifica_peca:verifica_peca(Pec_id),
     with_mutex(etapa_peca,
-               (   retract_grupo(Ep_ind,_Pec_id,_Qtd),
-                   assert_grupo(Ep_ind,Pec_id,Qtd))).
+               (   retract_etapa_peca(Ep_id,_Ep_ind,_Pec_id,_Epe_qtd_peca),
+                   assert_etapa_peca(Ep_id,Ep_ind,Pec_id,Epe_qtd_peca))).

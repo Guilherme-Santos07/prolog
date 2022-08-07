@@ -1,7 +1,7 @@
-%João Pedro Cruz Espíndola
+%Joï¿½o Pedro Cruz Espï¿½ndola
 %12111BSI245
-%Sistema de Gestão de Estoque e Produção da Fábrica  Brasileira de Aeronaves [2008]
-%Páginas 91.92 e 93
+%Sistema de Gestï¿½o de Estoque e Produï¿½o da Fï¿½brica  Brasileira de Aeronaves [2008]
+%Pï¿½ginas 91.92 e 93
 
 :- module(
       compra_item,
@@ -9,9 +9,10 @@
         compra_item/5
       ]).
 
-:- use_module(verifica_compra,[]).
 :- use_module(library(persistency)).
 :- use_module(chave,[]).
+:- use_module(verifica_compra,[]).
+:- use_module(verifica_peca,[]).
 
 :- persistent
     compra_item(ci_id:positive_integer,
@@ -24,16 +25,19 @@
 :- initialization(at_halt(db_sync(gc(always)))).
 
 insere(Id,Com_id,Pec_id,Ci_qtd_item,Ci_valor_unitario):-
-    chave:pk(compra_item,Id),
     verifica_compra:verifica_compra(Com_id),
-       with_mutex(compraItem,
+    verifica_peca:verifica_peca(Pec_id),
+    chave:pk(compra_item,Id),
+    with_mutex(compra_item,
                (   assert_compra_item(Id,Com_id,Pec_id,Ci_qtd_item,Ci_valor_unitario))).
 
 remove(Id) :-
     with_mutex(compra_item,
-               (     retract_compra_item(Id,_Com_id,_Pec_id,_Ci_qtd_item,_Ci_valor_unitario))).
+               (     retractall_compra_item(Id,_Com_id,_Pec_id,_Ci_qtd_item,_Ci_valor_unitario))).
 
 atualiza(Id,Com_id,Pec_id,Ci_qtd_item,Ci_valor_unitario) :-
+    verifica_compra:verifica_compra(Com_id),
+    verifica_peca:verifica_peca(Pec_id),
     with_mutex(compra_item,
                (     retract_compra_item(Id,_Com_id,_Pec_id,_Ci_qtd_item,_Ci_valor_unitario),
                   assert_compra_item(Id,Com_id,Pec_id,Ci_qtd_item,Ci_valor_unitario))).
