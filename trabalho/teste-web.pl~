@@ -32,5 +32,5 @@ reply_html_page([title('Exemplos')],
 %print_html(HtmlTokenizado).
 
 teste --> html([ h1('Página Principal'),
-                         a([href('#')],'Testando')
+                         a([class(link)],'Testando')
                  ]).
