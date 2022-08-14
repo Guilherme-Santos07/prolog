@@ -1,39 +1,33 @@
+% Guilherme dos Santos Silva
+% 12111bsi214
+% Sistema de gestão de estoque e produção da fábrica brasileira de
+% aeronaves [2008]
+
 :- use_module(library(http/thread_httpd)).
 :- use_module(library(http/http_dispatch)).
 :- use_module(library(http/html_write)).
 
-% html_requires está aqui
-:- use_module(library(http/html_head)).
-
-% serve_files_in_directory está aqui
-:- use_module(library(http/http_server_files)).
-
 % http_read_data está aqui
 :- use_module(library(http/http_client)).
-
-:- multifile http:location/3.
-:- dynamic http:location/3.
-
-http:location(principal, '/home', []).
 
 servidor(Porta) :-
     http_server(http_dispatch, [port(Porta)]).
 
 % Liga a rota ao tratador
-:- http_handler(principal(.), home ,[]).
-:- http_handler(principal(cidade), formulario_cidade , []).
-:- http_handler(principal(bairro), formulario_bairro , []).
-:- http_handler(principal(logradouro), formulario_logradouro , []).
+:- http_handler(root(.), home ,[]).
+:- http_handler(root(cidade), formulario_cidade , []).
+:- http_handler(root(bairro), formulario_bairro , []).
+:- http_handler(root(logradouro), formulario_logradouro , []).
 
 home(_Pedido) :-
 reply_html_page([title('Pagina Principal')],
-                h1('Pagina Principal'),
-                [a([href(cidade)], 'Cidade'),
-                 p('') ,
-                a([href(bairro)], 'Bairro'),
-                 p(''),
-                a([href(logradouro)], 'Logradouro')]
-               ).
+                  [h1('Pagina Principal'),
+                  a([href(cidade)], 'Cidade'),
+                  p('') ,
+                  a([href(bairro)], 'Bairro'),
+                  p(''),
+                  a([href(logradouro)], 'Logradouro')]
+                ).
 
 formulario_cidade(_Pedido) :-
 	reply_html_page(
@@ -48,9 +42,7 @@ formulario_cidade(_Pedido) :-
                          p([],
 		           [ label([for=ddd],'DDD:'),
 		             input([name=ddd, type=textarea]) ]),
-		         p([],
-		           input([name=enviar, type=submit, value='Enviar'],
-                         []))
+                      button([type=submit],['Enviar'])
 	           ])]).
 
 :- http_handler('/dadosCidade', recebe_formulario(Method),
@@ -64,8 +56,7 @@ formulario_bairro(_Pedido) :-
 	           [ p([],
 	               [ label([for=nome],'Nome:'),
 		             input([name=nome, type=textarea]) ]),
-		           input([name=enviar, type=submit, value='Enviar'],
-                         [])
+                      button([type=submit],['Enviar'])
 	           ])]).
 
 :- http_handler('/dadosBairro', recebe_formulario(Method),
@@ -82,9 +73,7 @@ formulario_logradouro(_Pedido) :-
 		         p([],
 		           [ label([for=tipo],'Tipo:'),
 		             input([name=tipo, type=textarea]) ]),
-		         p([],
-		           input([name=enviar, type=submit, value='Enviar'],
-                         []))
+		         button([type=submit],['Enviar'])
 	           ])]).
 
 :- http_handler('/dadosLogradouro', recebe_formulario(Method),
@@ -94,10 +83,8 @@ formulario_logradouro(_Pedido) :-
 recebe_formulario(post, Pedido) :-
     http_read_data(Pedido, Dados, []),
     format('Content-type: text/html~n~n', []),
-	format('<p>', []),
+    format('<p>', []),
     portray_clause(Dados),
     % escreve os dados do corpo
-    ( reply_html_page([],[\link_para_pagina_principal])).
-
-link_para_pagina_principal -->
-    html([p(''),a([href(home)], 'Voltar para a pagina principal')]).
+    format('<p>', []),
+    format('<a href="/">Voltar para a pagina principal</a>').
