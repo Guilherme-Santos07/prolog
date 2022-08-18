@@ -1,22 +1,49 @@
+% Guilherme dos Santos Silva
+% 12111bsi214
+% Sistema de gestï¿½o de estoque e produï¿½ï¿½o da fï¿½brica brasileira de
+% aeronaves [2008]
+
 :- use_module(library(http/thread_httpd)).
 :- use_module(library(http/http_dispatch)).
 :- use_module(library(http/html_write)).
 
-% http_read_data está aqui
+% http_read_data estï¿½ aqui
 :- use_module(library(http/http_client)).
+
+/* html_requires estï¿½ aqui */
+:- use_module(library(http/html_head)).
+/* serve_files_in_directory estï¿½ aqui */
+:- use_module(library(http/http_server_files)).
+
+:- http_handler(root(.), home ,[]).
+:- http_handler(root(cidade), formulario_cidade , []).
+:- http_handler(root(remedio), remedio , []).
+:- http_handler(root(bairro), formulario_bairro , []).
+:- http_handler(root(logradouro), formulario_logradouro , []).
+
+
+/* Localizaï¿½ï¿½o dos diretï¿½rios no sistema de arquivos */
+:- multifile user:file_search_path/2.
+
+user:file_search_path(dir_css, 'css').
+user:file_search_path(dir_js, 'js').
 
 servidor(Porta) :-
     http_server(http_dispatch, [port(Porta)]).
 
+/* Liga as rotas aos respectivos diretï¿½rios */
+:- http_handler(css(.),
+serve_files_in_directory(dir_css), [prefix]).
+:- http_handler(js(.),
+serve_files_in_directory(dir_js), [prefix]).
+
 % Liga a rota ao tratador
-:- http_handler(root(.), home ,[]).
-:- http_handler(root(cidade), formulario_cidade , []).
-:- http_handler(root(bairro), formulario_bairro , []).
-:- http_handler(root(logradouro), formulario_logradouro , []).
+
 
 home(_Pedido) :-
 reply_html_page([title('Pagina Principal')],
-                  [h1('Pagina Principal'),
+                  [div(class(container)),
+                   h1('Pagina Principal'),
                   a([href(cidade)], 'Cidade'),
                   p('') ,
                   a([href(bairro)], 'Bairro'),
@@ -24,21 +51,48 @@ reply_html_page([title('Pagina Principal')],
                   a([href(logradouro)], 'Logradouro')]
                 ).
 
+link_tabela(N) -->
+    html(a([ class(['link_tbl']),
+             href('/~s' - N)],
+           '~s' - N)).
+
+remedio(_):-
+    reply_html_page(
+        [title('Remédio'),style(body,'display: flex, align-itens: center')],
+        [
+            div(class('container text-start'),
+                [
+                    h1([class = 'fs-1 fw-bolder', style='font-family: Verdana, Geneva; background-color: rgb(223,61,104); color:white; padding-left:20px;height:50px'],'Dados do Remédio'),
+                    p([style = 'font-family: Verdana, Geneva; color:rgb(15,69,97); text-align:center '], ['O número da ID de cada remédio é gerado automaticamente.']),
+                    div(style = 'display: flex, align-itens: center', [
+                        form([action='/dadosRemedio',method='POST'], [
+                             p([style = 'font-family: Verdana, Geneva; color:rgb(15,69,97); height:50px'], [ label([for=usuIdAnalise],'Id do usuário que fez a análise do remédio:  '), input([name=usuIdAnalise, type=textarea, style = 'width:30%'])]),
+                             p([style = 'font-family: Verdana, Geneva; color:rgb(15,69,97); height:50px'], [ label([for=usuIdCadastro],'Id do usuário que cadastrou o remédio:  '), input([name=usuIdCadastro, type=textarea, style = 'width:30%'])]),
+                             p([style = 'font-family: Verdana, Geneva; color:rgb(15,69,97); height:50px'], [ label([for=remDescricao],'Descrição do remédio:  '), input([name=remDescricao, type=textarea,style = 'width:30%'])]),
+                             p([style = 'font-family: Verdana, Geneva; color:rgb(15,69,97); height:50px'], [ label([for=remDataCadastro],'Data do cadastro do remédio:  '), input([name=remDataCadastro, type=textarea,style = 'width:30%'])]),
+                             p([style = 'font-family: Verdana, Geneva; color:rgb(15,69,97); height:50px'], [ label([for=remDataAnalise],'Data da análise do remédio:  '), input([name=remDataAnalise, type=textarea,style = 'width:30%'])]),
+                             p([style = 'font-family: Verdana, Geneva; color:rgb(15,69,97); height:50px'], [ label([for=remSituacao],'Situação do remédio:  '), input([name=remSituacao, type=textarea,style = 'width:30%'])]),
+                             p([style = 'font-family: Verdana, Geneva; color:rgb(15,69,97); height:50px'], [ label([for=remDataExclusao, class='form-label'],'Data data exclusão do remédio:  '), input([name=remDataExclusao, type=textarea, style = 'width:30%'])]),
+                             button([type=submit, class='btn btn-dark'], ['Confirmar'])
+
+                ])])
+              ]),
+            \inicio
+        ]).
+
 formulario_cidade(_Pedido) :-
 	reply_html_page(
-	    title('Formulário Cidade'),
-	    [ form([ action='/dadosCidade', method='POST'],
-	           [ p([],
-	               [ label([for=nome],'Nome:'),
+            inicio,
+	    [title('Formulï¿½rio Cidade')],
+                     form([style = 'display:flex; flex-direction: column; align-itens: center',class='form', action='/dadosCidade', method='POST'],
+	           [ p([style = 'font-family: Verdana, Geneva; color:rgb(15,69,97); height:50px; background-color:black'],[ label([for=nome],'Nome:'),
 		             input([name=nome, type=textarea]) ]),
-		         p([],
-		           [ label([for=uf],'UF:'),
+                     p([],[ label([for=uf],'UF:'),
 		             input([name=uf, type=textarea]) ]),
-                         p([],
-		           [ label([for=ddd],'DDD:'),
+                     p([],[ label([for=ddd],'DDD:'),
 		             input([name=ddd, type=textarea]) ]),
-                      button([type=submit],['Enviar'])
-	           ])]).
+                     button([type='submit'],['Enviar'])
+	           ])).
 
 :- http_handler('/dadosCidade', recebe_formulario(Method),
                 [ method(Method),
@@ -46,7 +100,7 @@ formulario_cidade(_Pedido) :-
 
 formulario_bairro(_Pedido) :-
 	reply_html_page(
-	    title('Formulário Bairro'),
+	    title('Formulï¿½rio Bairro'),
 	    [ form([ action='/dadosBairro', method='POST'],
 	           [ p([],
 	               [ label([for=nome],'Nome:'),
@@ -60,7 +114,7 @@ formulario_bairro(_Pedido) :-
 
 formulario_logradouro(_Pedido) :-
 	reply_html_page(
-	    title('Formulário Logradouro'),
+	    title('Formulï¿½rio Logradouro'),
 	    [ form([ action='/dadosLogradouro', method='POST'],
 	           [ p([],
 	               [ label([for=nome],'Nome:'),
@@ -83,3 +137,21 @@ recebe_formulario(post, Pedido) :-
     % escreve os dados do corpo
     format('<p>', []),
     format('<a href="/">Voltar para a pagina principal</a>').
+
+
+inicio -->
+    html(body([ \html_post(head,
+                           [ meta([name(viewport),
+                                   content('width=device-width, initial-scale=1')])]),
+                \html_root_attribute(lang,'pt-br'),
+                \html_requires(css('bootstrap.min.css')),
+                script([ src('js/bootstrap.bundle.min.js'),
+                         type('text/javascript')], [])
+              ])).
+
+page -->
+    html([ \html_post(head, [ meta([name(viewport), content('width=device-width, initial-scale=1')])]),
+           \html_root_attribute(lang,'pt-br'),
+           \html_requires(css('bootstrap.min.css')),
+           script([ src('js/bootstrap.bundle.min.js'), type('text/javascript')], [])
+         ]).
