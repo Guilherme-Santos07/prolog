@@ -14,7 +14,7 @@
 % Por exemplo: se o projeto bookmarks está em '/home/pedro/bookmarks'
 %          então o caminho até o diretório do projeto é '/home/pedro'
 
-user:file_search_path(dir_base, 'C:/Users/gui07/OneDrive/Área de Trabalho/Repositorios/prolog/trabalho').
+user:file_search_path(dir_base, '/users/bernardo/documents').
 
 % Diretório do projeto
 user:file_search_path(projeto, dir_base(bookmarks)).
@@ -38,6 +38,7 @@ user:file_search_path(gabarito, frontend(gabaritos)).
 % Backend
 user:file_search_path(backend, projeto(backend)).
 
+
 % Banco de dados
 user:file_search_path(bd, backend(bd)).
 user:file_search_path(bd_tabs, bd(tabelas)).
@@ -49,3 +50,37 @@ user:file_search_path(api1, api(v1)).
 
 % Middle-end
 user:file_search_path(middle_end, projeto(middle_end)).
+
+
+%Configuração do servidor
+
+
+% Carrega o servidor e as rotas
+
+:- load_files([ servidor,
+                rotas
+              ],
+              [ silent(true),
+                if(not_loaded) ]).
+
+% Inicializa o servidor para ouvir a porta 8000
+:- initialization( servidor(8004) ).
+
+
+% Carrega o frontend
+
+:- load_files([ gabarito(bootstrap5),
+                gabarito(boot5rest),
+                frontend(entrada),
+                frontend(bookmark)
+              ],
+              [ silent(true),
+                if(not_loaded) ]).
+
+
+% Carrega o backend
+
+:- load_files([ api1(bookmarks),api1(logradouros)
+              ],
+              [ silent(true),
+                if(not_loaded) ]).
