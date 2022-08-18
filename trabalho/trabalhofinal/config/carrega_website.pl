@@ -14,10 +14,7 @@
 
 :- load_files([ gabarito(bootstrap5),
                 gabarito(boot5rest),
-                frontend(entrada),
-                frontend(bookmark),
                 frontend(entrar),
-                frontend(home),
                 frontend(cidade)
               ],
               [ silent(true),
@@ -36,7 +33,7 @@
                 api1(compras),
                 api1(conjuntos),
                 api1(etapa_pecas),
-                api1(etapa_producoes)
+                api1(etapa_producoes),
                 api1(fabricas),
                 api1(fornecedores),
                 api1(funcionarios),

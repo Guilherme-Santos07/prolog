@@ -46,15 +46,15 @@ http:location(webfonts, root(webfonts), []).
 
 % Rotas do Frontend
 
-/* Pagina inicial */
+/* Pagina inicial 
 :- use_module(frontend(home),[]).
 
-:- http_handler( root(.), home:inicio,   []).
+:- http_handler( root(.), home:inicio,   []).*/
 
 /* rota para selecionar uma tabela*/
 :- use_module(frontend(entrar),[]).
 
-:- http_handler( root(entrar), entrar:entrada,   []).
+:- http_handler( root(.), entrar:entrada,   []).
 
 /* rotas para a tabela cidade*/
 

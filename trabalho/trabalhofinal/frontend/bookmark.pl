@@ -5,7 +5,7 @@
 /* html_requires  */
 :- use_module(library(http/html_head)).
 
-:- ensure_loaded(gabarito(boot5rest)).
+/*:- ensure_loaded(gabarito(boot5rest)).*/
 
 :- use_module(bd(logradouro),[]).
 
