@@ -32,7 +32,6 @@
            pec_estante:text,
            pec_corredor:text).
 
-:- initialization(db_attach('tabelas/tbl_peca.pl', [])).
 :- initialization(at_halt(db_sync(gc(always)))).
 
 carrega_tab(ArqTabela):-

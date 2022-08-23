@@ -10,7 +10,6 @@
     grupo(gru_id: positive_integer,
           gru_nome: text).
 
-:- initialization(db_attach('tabelas/tbl_grupo.pl', [])).
 :- initialization(at_halt(db_sync(gc(always)))).
 
 carrega_tab(ArqTabela):-

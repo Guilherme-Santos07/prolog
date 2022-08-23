@@ -133,7 +133,7 @@ form_cidade -->
     html(form([ id('cidade-form'),
                 onsubmit("redirecionaResposta( event, '/cidade' )"),
                 action('/api/v1/cidades/') ],
-              [ \método_de_envio('POST'),
+              [ \metodo_de_envio('POST'),
                 \campo(cid_nome, 'Nome', text),
                 \campo(cid_tipo, 'Uf', text),
                 \campo(cid_ddd, 'Ddd', number),
@@ -151,9 +151,9 @@ enviar_ou_cancelar(RotaDeRetorno) -->
 
 
 
-campo(Nome, Rótulo, Tipo) -->
+campo(Nome, Rotulo, Tipo) -->
     html(div(class('mb-3'),
-             [ label([ for(Nome), class('form-label') ], Rótulo),
+             [ label([ for(Nome), class('form-label') ], Rotulo),
                input([ type(Tipo), class('form-control'),
                        id(Nome), name(Nome)])
              ] )).
@@ -180,8 +180,8 @@ form_cidade(Id, Nome, Uf, Ddd) -->
     html(form([ id('cidade-form'),
                 onsubmit("redirecionaResposta( event, '/cidade' )"),
                 action('/api/v1/cidades/~w' - Id) ],
-              [ \método_de_envio('PUT'),
-                \campo_não_editável(id, 'Id', number, Id),
+              [ \metodo_de_envio('PUT'),
+                \campo_nao_editavel(id, 'Id', number, Id),
                 \campo(cid_nome, 'Nome', text, Nome),
                 \campo(cid_uf,    'Uf',    text,  Uf),
                 \campo(cid_ddd,    'Ddd',    number,  Ddd),
@@ -189,16 +189,16 @@ form_cidade(Id, Nome, Uf, Ddd) -->
               ])).
 
 
-campo(Nome, Rótulo, Tipo, Valor) -->
+campo(Nome, Rotulo, Tipo, Valor) -->
     html(div(class('mb-3'),
-             [ label([ for(Nome), class('form-label')], Rótulo),
+             [ label([ for(Nome), class('form-label')], Rotulo),
                input([ type(Tipo), class('form-control'),
                        id(Nome), name(Nome), value(Valor)])
              ] )).
 
-campo_não_editável(Nome, Rótulo, Tipo, Valor) -->
+campo_nao_editavel(Nome, Rotulo, Tipo, Valor) -->
     html(div(class('mb-3 w-25'),
-             [ label([ for(Nome), class('form-label')], Rótulo),
+             [ label([ for(Nome), class('form-label')], Rotulo),
                input([ type(Tipo), class('form-control'),
                        id(Nome),
                        % name(Nome),%  não é para enviar o id
@@ -206,5 +206,5 @@ campo_não_editável(Nome, Rótulo, Tipo, Valor) -->
                        readonly ])
              ] )).
 
-método_de_envio(Método) -->
-    html(input([type(hidden), name('_método'), value(Método)])).
+metodo_de_envio(Metodo) -->
+    html(input([type(hidden), name('_método'), value(Metodo)])).

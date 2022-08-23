@@ -12,10 +12,10 @@
 
 % Carrega o frontend
 
-:- load_files([ gabarito(bootstrap5),
-                gabarito(boot5rest),
-                frontend(entrar),
-                frontend(cidade)
+:- load_files([ frontend/cidade,
+                gabarito/bootstrap5,
+                gabarito/boot5rest,
+                frontend/entrar              
               ],
               [ silent(true),
                 if(not_loaded) ]).
@@ -23,24 +23,24 @@
 
 % Carrega o backend
 
-:- load_files([ api1(bookmarks),
-                api1(logradouros),
-                api1(avioes),
-                api1(bairros),
-                api1(ceps),
-                api1(cidades),
-                api1(compra_itens),
-                api1(compras),
-                api1(conjuntos),
-                api1(etapa_pecas),
-                api1(etapa_producoes),
-                api1(fabricas),
-                api1(fornecedores),
-                api1(funcionarios),
-                api1(grupos),
-                api1(pecas),
-                api1(pessoas),
-                api1(testes)
+:- load_files([ api1/cidades,
+                api1/bookmarks,
+                api1/logradouros,
+                api1/avioes,
+                api1/bairros,
+                api1/ceps,
+                api1/compra_itens,
+                api1/compras,
+                api1/conjuntos,
+                api1/etapa_pecas,
+                api1/etapa_producoes,
+                api1/fabricas,
+                api1/fornecedores,
+                api1/funcionarios,
+                api1/grupos,
+                api1/pecas,
+                api1/pessoas,
+                api1/testes
                 ],
               [ silent(true),
                 if(not_loaded) ]).

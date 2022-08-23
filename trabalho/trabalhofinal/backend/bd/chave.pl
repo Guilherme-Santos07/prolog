@@ -6,7 +6,6 @@
      chave( nome:atom,
           valor:positive_integer ).
 
-:- initialization( db_attach('tabelas/tbl_chave.pl', []) ).
 :- initialization(at_halt(db_sync(gc(always)))).
 
 carrega_tab(ArqTabela):-

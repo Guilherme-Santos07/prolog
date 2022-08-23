@@ -23,8 +23,8 @@ http_json:json_type('text/x-json').
 
 
 :- load_files([ caminhos,
-                config(banco_de_dados),
-                config(carrega_website)
+                config/banco_de_dados,
+                config/carrega_website
               ],
               [ silent(true),
                 if(not_loaded) ]).

@@ -17,7 +17,7 @@
          avi_nome:text,
          avi_tipo:text).
 
-:- initialization(db_attach('tabelas/tbl_aviao.pl', [])).
+
 :- initialization(at_halt(db_sync(gc(always)))).
 
 carrega_tab(ArqTabela):-

@@ -14,7 +14,6 @@
                    ep_tempo_etapa: text,
                    ep_descricao: text).
 
-:- initialization(db_attach('tabelas/tbl_etapa_producao.pl',[])).
 :- initialization(at_halt(db_sync(gc(always)))).
 
 carrega_tab(ArqTabela):-

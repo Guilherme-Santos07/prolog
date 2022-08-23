@@ -52,13 +52,13 @@ http:location(webfonts, root(webfonts), []).
 :- http_handler( root(.), home:inicio,   []).*/
 
 /* rota para selecionar uma tabela*/
-:- use_module(frontend(entrar),[]).
+:- use_module(frontend/entrar,[]).
 
 :- http_handler( root(.), entrar:entrada,   []).
 
 /* rotas para a tabela cidade*/
 
-:- use_module(frontend(cidade),[]).
+/*:- use_module(frontend(cidade),[]).*/
 
 :- http_handler( root(cidade), cidade:home, []).
 
@@ -68,7 +68,7 @@ http:location(webfonts, root(webfonts), []).
 
 /* rotas para a tabela logradouro*/
 
-:- use_module(frontend(logradouro),[]).
+/*:- use_module(frontend(logradouro),[]).*/
 
 :- http_handler( root(logradouro), logradouro:home, []).
 
@@ -78,7 +78,7 @@ http:location(webfonts, root(webfonts), []).
 
 /* rotas para a tabela bairro*/
 
-:- use_module(frontend(bairro),[]).
+/*:- use_module(frontend(bairro),[]).*/
 
 :- http_handler( root(bairro), bairro:home, []).
 
@@ -88,7 +88,7 @@ http:location(webfonts, root(webfonts), []).
 
 /* rotas para a tabela cep*/
 
-:- use_module(frontend(cep),[]).
+/*:- use_module(frontend(cep),[]).*/
 
 :- http_handler( root(cep), cep:home, []).
 

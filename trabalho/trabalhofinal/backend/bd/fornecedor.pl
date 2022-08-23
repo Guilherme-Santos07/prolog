@@ -24,7 +24,6 @@
              for_status : text,
              for_categoria : text).
 
-:- initialization(db_attach('tabelas/tbl_fornecedor.pl',[])).
 :- initialization(at_halt(db_sync(gc(always)))).
 
 carrega_tab(ArqTabela):-

@@ -18,7 +18,6 @@
           fab_cnpj : text,
           fab_inscricao : nonneg).
 
-:- initialization(db_attach('tabelas/tbl_fabrica.pl',[])).
 :- initialization(at_halt(db_sync(gc(always)))).
 
 carrega_tab(ArqTabela):-

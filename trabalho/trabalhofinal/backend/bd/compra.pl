@@ -22,7 +22,6 @@
            com_numero_documento:text,
            com_total_nota:float).
 
-:- initialization(db_attach('tabelas/tbl_compra.pl', [])).
 :- initialization(at_halt(db_sync(gc(always)))).
 
 carrega_tab(ArqTabela):-

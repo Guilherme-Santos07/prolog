@@ -21,7 +21,6 @@
            ci_qtd_item:float,
            ci_valor_unitario:float).
 
-:- initialization(db_attach('tabelas/tbl_compra_item.pl', [])).
 :- initialization(at_halt(db_sync(gc(always)))).
 
 carrega_tab(ArqTabela):-

@@ -17,7 +17,6 @@
         bai_id: positive_integer,
         log_id: positive_integer).
 
-:- initialization(db_attach('tabelas/tbl_cep.pl', [])).
 :- initialization(at_halt(db_sync(gc(always)))).
 
 carrega_tab(ArqTabela):-

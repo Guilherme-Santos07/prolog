@@ -14,7 +14,6 @@
              tes_ind_rejeicao: text).
 
 :- initialization(at_halt(db_sync(gc(always)))).
-:- initialization(db_attach('tabelas/tbl_teste.pl', [])).
 
 carrega_tab(ArqTabela):-
     db_attach(ArqTabela, []).

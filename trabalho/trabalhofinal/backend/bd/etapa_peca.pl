@@ -16,7 +16,6 @@
                pec_id: positive_integer,
                epe_qtd_peca: float).
 
-:- initialization(db_attach('tabelas/tbl_etapa_peca.pl', [])).
 :- initialization(at_halt(db_sync(gc(always)))).
 
 carrega_tab(ArqTabela):-

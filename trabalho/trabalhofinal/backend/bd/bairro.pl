@@ -12,7 +12,6 @@
         bai_id: positive_integer,
         bai_nome: text).
 
-:- initialization(db_attach('tabelas/tbl_bairro.pl', [])).
 :- initialization(at_halt(db_sync(gc(always)))).
 
 carrega_tab(ArqTabela):-

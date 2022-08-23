@@ -21,7 +21,6 @@
           pes_email : text,
           pes_numero : text).
 
-:- initialization(db_attach('tabelas/tbl_pessoa.pl',[])).
 :- initialization(at_halt(db_sync(gc(always)))).
 
 carrega_tab(ArqTabela):-

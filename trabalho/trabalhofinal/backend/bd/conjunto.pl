@@ -11,7 +11,6 @@
     conjunto(con_id:positive_integer,
          con_nome:text).
 
-:- initialization(db_attach('tabelas/tbl_conjunto.pl', [])).
 :- initialization(at_halt(db_sync(gc(always)))).
 
 carrega_tab(ArqTabela):-

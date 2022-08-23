@@ -9,7 +9,7 @@
         log_tipo: text).
 
 carrega_tab(ArqTabela):- db_attach(ArqTabela, []).
-:- initialization(db_attach('tabelas/tbl_logradouro.pl', [])).
+
 :- initialization(at_halt(db_sync(gc(always)))).
 
 carrega_tab(ArqTabela):-

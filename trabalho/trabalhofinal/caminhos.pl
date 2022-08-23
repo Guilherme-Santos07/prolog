@@ -3,7 +3,7 @@
  *      Localização dos diretórios no sistema de arquivos     *
  *                                                            *
  *************************************************************
- */
+ 
 
 :- multifile user:file_search_path/2.
 
@@ -50,8 +50,8 @@ user:file_search_path(api1, api(v1)).
 
 % Middle-end
 user:file_search_path(middle_end, projeto(middle_end)).
+*/
 
-/*
 :- multifile user:file_search_path/2.
 
 % file_search_path(Apelido, Caminho)
@@ -95,4 +95,4 @@ user:file_search_path(api1, api/v1).
 
 
 % Middle-end
-user:file_search_path(middle_end, projeto/middle_end).*/
+user:file_search_path(middle_end, projeto/middle_end).
